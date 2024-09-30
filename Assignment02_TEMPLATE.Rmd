@@ -1,6 +1,6 @@
 ---
 title: "Assignment 2"
-author: "Insert My Name"
+author: "Dushyant Goelli"
 date: "2024-09-25"
 output: html_document # you can change to other output format if you want
 ---
@@ -15,14 +15,33 @@ knitr::opts_chunk$set(echo = TRUE)
 ## 1.1 (Q1)   
 
 <!-- Include your answers for each question under a second level heading eg ## 1.1 (Q1) -->
-**** insert your solutions here *****
+```{r}
+hSF <- Hawks %>%
+filter(Species == "RT", Weight >= 1000) %>%
+select(Wing,Weight,Tail) 
+```
 
-## 1.1 (Q2)   
+## 1.1 (Q2)
+The data has `3` variables. In Machine Learning parlance, there are `3` features.
+There are `398` observables
 
 ## 1.2 (Q1)
+```{r}
+hSF %>%
+arrange(Wing) %>%
+head(n=5)
+```
 
+## 1.3 (Q1)
+```{r}
+hawkSpeciesNameCodes <-
+data.frame(species_code = c('CH', 'RT', 'SS'), species_name_full = c("Cooper's", "Red-tailed", "Sharp-shinned"))
+```
 
+## 1.3 (Q2)
+```{r}
 
+```
 ....
 
 # 2. Random experiments, events and sample spaces, and the set theory
