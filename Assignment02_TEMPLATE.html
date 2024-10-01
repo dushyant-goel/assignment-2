@@ -499,11 +499,13 @@ is<br />
 </div>
 <div id="q1-6" class="section level2">
 <h2>2.2 (Q1)</h2>
-<p>$ A := {1, 2, 3}$ $ B := {2, 4, 6}$ $ C := {4, 5, 6}$</p>
+<p>$$</p>
+<p>A := {1, 2, 3} \ B := {2, 4, 6} \ C := {4, 5, 6} \</p>
+<p>$$</p>
 <ol style="list-style-type: decimal">
-<li>$ A B := {1, 2, 3, 4, 6} $,</li>
+<li>$ A B := {1, 2, 3, 4, 6} $</li>
 <li>$ A B := {2} $ , $ A C := $</li>
-<li>$ A B := {1, 3}$, $ A C := {1, 2, 3}$</li>
+<li>$ A B := {1, 3}$, $ A C := {1, 2, 3} $</li>
 <li>$ A $ and $ B $ are not disjoint, $ A $ and $ C $ are disjoint.</li>
 <li>By definition of complementary, $ B $ and $ A :setminus B $ are
 disjoint sets.</li>
@@ -520,33 +522,177 @@ Partition into <span class="math inline">\(three\)</span> sets, say
 <div id="q2-4" class="section level2">
 <h2>2.2 (Q2)</h2>
 <ol style="list-style-type: decimal">
-<li><span class="math display">\[
-\begin{align}
-(A^c)^c  =&gt;\\
-\omega \in \Omega : \omega \notin A^c =&gt;\\
-\omega \in A =&gt; \\
-A
-\end{align}
-\]</span></li>
-<li><span class="math inline">\(\phi\)</span></li>
-<li>Suppose $ x B^c $<br />
-$ =&gt; x B $ — 1<br />
-$ A B $<br />
-$ =&gt; y B, y A $<br />
-$ =&gt; y B, y A $ — 2<br />
+<li><p>$$</p>
+<p>(A<sup>c)</sup>c =&gt;\ : A^c =&gt;\ A =&gt; \ A</p>
+<p>$$</p></li>
+<li><p><span class="math inline">\(\phi\)</span></p></li>
+<li><p>Suppose $ x B^c <span class="math inline">\(\
+\)</span> =&gt; x B $ — 1<br />
+$ A B <span class="math inline">\(\
+\)</span> =&gt; y B, y A $<br />
+</p></li>
+</ol>
+<p>Combining 1 and 2 $ if y B =&gt; y A $ — 2<br />
+$ y B^c =&gt; y A^c <span class="math inline">\(\
+\)</span> B^c A^c $</p>
+<ol start="4" style="list-style-type: decimal">
+<li>To Prove:<br />
+$ (A B)^c = A^c B^c $<br />
 </li>
 </ol>
-<p>Combining 1 and 2</p>
+<p>Suppose,<br />
+$ x (A B)^c <span class="math inline">\(\
+\)</span> x (A B) <span class="math inline">\(\
+\)</span> x  is  not  in  A  and  x  is  not  in  B <span class="math inline">\(\
+\)</span> x A  and  x B $<br />
+$ x A^c and x B^c $<br />
+$ x A^c B^c $<br />
+</p>
+<p>Expression for $(<em>{k=1}^{K} A_k)^c $<br />
+$</em>{k=1}^{K} A_k ^c $<br />
+</p>
+<ol start="5" style="list-style-type: decimal">
+<li>To Prove : $ (A B)^c = A^c B^c $</li>
+</ol>
+<p>Suppose,<br />
+$ x (A B)^c $<br />
+$ x (A B) $<br />
+$ x A and x B $<br />
+$ x A^c and x B^c $$ x A^c B^c $</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Expression for $(<em>{k=1}^{K} A_k)^c $<br />
+$</em>{k=1}^{K} A_k ^c $</li>
+</ol>
 </div>
+<div id="q3-1" class="section level2">
+<h2>2.2 (Q3)</h2>
+<p>$ |E| := 2^K - 1 $ This is because every element in <span class="math inline">\(\omega\)</span> has <span class="math inline">\(2\)</span> options, - to be chosen as an element
+of a set, which is contained in E. - not be chosen.</p>
+<p>But Since $ E $ and not $ E $, we substract the case when all
+elements of <span class="math inline">\(\omega\)</span> are chosen.</p>
+</div>
+<div id="q4" class="section level2">
+<h2>2.2 (Q4)</h2>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\phi\)</span></li>
+<li></li>
+</ol>
+<ul>
+<li>$ S_1, S_2, S_3, S_4 $ are pairwise disjoint.</li>
+<li>$ S_1 S_2 S_3 S_4 = A_1 A_2 A_3 A_4 $</li>
+</ul>
+<p>Hence the given $ S{i} $ form a partition.</p>
+</div>
+</div>
+<div id="q5" class="section level1">
+<h1>2.2 (Q5)</h1>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\1_{A^c(}(\omega) := 1 -
+1_A(\omega)\)</span></li>
+<li><span class="math inline">\(\Omega\)</span></li>
+<li>$ 1_{(A B)^c} =&gt; $<br />
+$ 1 - 1_{A B} =&gt; $<br />
+$ 1 - 1_A.1_B =&gt; $<br />
+$ 1 - 1_A + 1 - 1_B - 1 + 1_A + 1_B - 1_A.1_B $ (adding and subtracting
+<span class="math inline">\(1_A, 1_B\)</span><br />
+$ (1-1_A) + (1-1_B) - (1-1_A)(1-1_B) $<br />
+$ (1_{A^c}) + 1_{B^c} - 1_{A<sup>c}.1_{B</sup>c} $ $ 1_{A^c B^c} $</li>
+</ol>
+<p>$ Q.E.D. $</p>
 </div>
 <div id="probability-theory" class="section level1">
 <h1>3. Probability theory</h1>
 <div id="q1-7" class="section level2">
-<h2>3 (Q1)</h2>
+<h2>3.1 (Q1)</h2>
+<p>$ = { {}, {a}, {b}, {c}, {a,b}, {b,c}, {a,c}, {a,b,c} } $<br />
+</p>
+<p>We define $ P(A_i) A_i . $ Here $ A_i := {a} , {b}, {c}$ are disjoint
+events.  </p>
+<p>P{<span class="math inline">\(\phi\)</span>} = 0<br />
+P({a}) = 0.5<br />
+P({b}) = 0.1<br />
+P({c}) = 0.4<br />
+P({a,b}) = 0.6<br />
+P({b,c}) = 0.5<br />
+P({a,c}) = 0.9<br />
+P({a,b,c}) = 1.0<br />
+</p>
 </div>
 <div id="q2-5" class="section level2">
-<h2>3 (Q2)</h2>
-<p>…..</p>
+<h2>3.1 (Q2)</h2>
+<p>The given function <span class="math inline">\(P\)</span> will
+satisfie the Rules of Probability if the disjoint paritions {0} and {1}
+have probability <span class="math inline">\(\geq\)</span> 0 and their
+sum is 1.</p>
+<p>However, that depends on value of <span class="math inline">\(q\)</span>.<br />
+If $ 0 q $, then the given function is a probability function.</p>
+</div>
+<div id="q1-8" class="section level2">
+<h2>3.2 (Q1)</h2>
+<p>We know, for sets $ A $ and $ B <span class="math inline">\(, \
+\)</span> P(A B) = P(A) + P(B) - P(A B) $   For disjoint sets <span class="math inline">\(P(A \cap B) = 0\)</span></p>
+<p>Consider <span class="math inline">\(P(\bigcup_{i=1}^n A_i)\)</span>,
+will be the sum of <span class="math inline">\(P(A_i)\)</span> and
+subtracting pairwise <span class="math inline">\(P(A_i \cap
+A_{i+1})\)</span>. But we know for disjoint <span class="math inline">\(A_i\)</span> all <span class="math inline">\(P(A_i
+\cap A_{i+1})\)</span> = 0.<br />
+</p>
+<p>Hence the intersection has no contribution to the union.<br />
+</p>
+<p>Using <strong>Rule 3</strong>,<br />
+</p>
+<p><span class="math inline">\(P(\bigcup_{i=1}^n A_i) =
+\sum_{i=1}^nP(A_i)\)</span></p>
+</div>
+<div id="q2-6" class="section level2">
+<h2>3.2 (Q2)</h2>
+<p><span class="math display">\[
+P(S^c) \\
+= P(\Omega \setminus S) \\
+= P(\Omega) - P(S) \\
+= 1 - P(S) \\
+\]</span> Q.E.D.</p>
+</div>
+<div id="q3-2" class="section level2">
+<h2>3.3 (Q3)</h2>
+<p>Let the sample space <span class="math inline">\(\Omega\)</span> be
+the set of all natural numbers <span class="math inline">\(N\)</span>.<br />
+Let us define an experiment, in which we pick up one number with
+replacement from <span class="math inline">\(N\)</span> and divide it by
+2 and by 5.<br />
+Let the events <span class="math inline">\(\omega_1\)</span> := number
+is divisble by 2, <span class="math inline">\(\omega_2\)</span> :=
+number is divisible by 5.<br />
+<span class="math inline">\(P({\omega_1}) = \frac{1}{2}\)</span> –
+a<br />
+<span class="math inline">\(P({\omega_2}) = \frac{1}{5}\)</span> –
+b<br />
+<span class="math inline">\(P({\omega_1, \omega_2}) = \frac{1}{2} +
+\frac{1}{5} - \frac{1}{10}\)</span> – c<br />
+</p>
+<p>$ a + b c $<br />
+We can generalize this to <span class="math inline">\(\omega_i\)</span>
+event, where the <span class="math inline">\(i^{th}\)</span> event
+represents if the number is divisible by i+1.<br />
+</p>
+<p>Hence proven.</p>
+</div>
+<div id="q4-1" class="section level2">
+<h2>3.3 (Q4)</h2>
+<p>The probabilities of disjoint sets is simple summation. Breaking the
+problem into disjoint sets :- <span class="math display">\[
+P(A \cup B) = P(A\cap B^c) + P(A\cap B) + P(A^c \cap B) -- 1
+\]</span> Now <span class="math display">\[
+P(A) = P(A \cap B^c) + P(A \cap B) -- 2 \\
+P(B) = P(B \cap A^c) + P(A \cap B) -- 3 \\
+\]</span></p>
+<p>Rearranging 2, 3 and substituting <span class="math inline">\(P(A\cap
+B^c), P(A^c \cap B)\)</span> values in 1</p>
+<p><span class="math display">\[
+P(A \cup B) = P(A) - P(A \cap B) + P(B) - P(A \cap B) + P(A \cap B) \\
+=&gt; P(A \cap B) = P(A) + P(B) - P(A \cap B)
+\]</span></p>
+<p>Hence Proven</p>
 </div>
 </div>
 
