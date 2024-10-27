@@ -237,77 +237,88 @@ Hence the given $\bigcup S_{i}$ form a partition.
 
 # 3. Probability theory
 
-## 3.1 (Q1)
+## 3.1 Rules of probability
+### (Q1)
 
-\$ \epsilon = { {\phi}, {a}, {b}, {c}, {a,b}, {b,c}, {a,c}, {a,b,c} } \$\
+$E = \{ {\phi}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}$
+$$
+P(\phi) = 0\\
+P(\{a\}) = 0.5\\
+P(\{b\}) = 0.1\\
+P(\{c\}) = 0.4\\
+P(\{a,b\}) = 0.6\\
+P(\{b,c\}) = 0.5\\
+P(\{a,c\}) = 0.9\\
+P(\{a,b,c\}) = 1.0\\
+$$
 
-We define \$ P(A_i) \forall A_i \in \epsilon. \$ Here \$ A_i := {a} , {b}, {c}\$ are disjoint events.  
+### (Q2)
 
-P{$\phi$} = 0\
-P({a}) = 0.5\
-P({b}) = 0.1\
-P({c}) = 0.4\
-P({a,b}) = 0.6\
-P({b,c}) = 0.5\
-P({a,c}) = 0.9\
-P({a,b,c}) = 1.0\
+Rule 1: $P(A) \geq 0$ for any $A \in E$  
+Given $$
+P(\phi) = 0 \\
+P(\{0\}) = 1-q \\
+P(\{1\}) = q \\
+P(\{0,1\}) = 1 \\
+$$
+This satisfies Rule 1
 
-## 3.1 (Q2)
+Rule 2: $P(\Omega) = 1$  
+Here $\Omega = \{0, 1\}$. Given $P(\{0,1\}) = 1$  
+This satisfies Rule 2
 
-The given function $P$ will satisfie the Rules of Probability if the disjoint paritions {0} and {1} have probability $\geq$ 0 and their sum is 1.
+Rule 3: Pairwise disjoint events are $\{0\}, \{1\}$.  
+$P(\{0\} \cup \{1\}) = P(\{0, 1\}) = 1$  
+$P(\{0\}) + P(\{1\}) = q + (1-q) = 1$  
+LHS = RHS  
+This satisfies Rule 3  
 
-However, that depends on value of $q$.\
-If \$ 0 \leq q \leq 1 \$, then the given function is a probability function.
+## 3.2 Deriving new properties from the rules of probability 
+### (Q1)
 
-## 3.2 (Q1)
-
-We know, for sets \$ A \$ and \$ B $, \$ P(A \cup B) = P(A) + P(B) - P(A \cap B) \$   For disjoint sets $P(A \cap B) = 0$
-
-Consider $P(\bigcup_{i=1}^n A_i)$, will be the sum of $P(A_i)$ and subtracting pairwise $P(A_i \cap A_{i+1})$. But we know for disjoint $A_i$ all $P(A_i \cap A_{i+1})$ = 0.\
-
-Hence the intersection has no contribution to the union.\
 
 Using **Rule 3**,\
+$P(\bigcup _{i=1}^{\infty} A_i) = \sum_{i=1}^\infty P(A_i)$  
+Define $A_{n+1}=\phi, A_{n+2}=\phi, ...$  
+$P(\phi) = 0$
 
-$P(\bigcup_{i=1}^n A_i) = \sum_{i=1}^nP(A_i)$
+Now apply Rule 3 on given equation to get the result.
 
-## 3.2 (Q2)
-
+### (Q2)
+By Rule 3,
 $$
-P(S^c) \\
-= P(\Omega \setminus S) \\
-= P(\Omega) - P(S) \\
-= 1 - P(S) \\
+P(S^c) + P(S) = P(S \cup S^c) \\
+P(S^c) + P(S) = P(\Omega) \\
+P(S^c) + P(S) = 1 ...[rule\ 2]\\ 
+P(S^c) = 1 - P(S) \\
 $$ Q.E.D.
 
-## 3.3 (Q3)
+### (Q3)
 
-Let the sample space $\Omega$ be the set of all natural numbers $N$.\
-Let us define an experiment, in which we pick up one number with replacement from $N$ and divide it by 2 and by 5.\
-Let the events $\omega_1$ := number is divisble by 2, $\omega_2$ := number is divisible by 5.\
-$P({\omega_1}) = \frac{1}{2}$ -- a\
-$P({\omega_2}) = \frac{1}{5}$ -- b\
-$P({\omega_1, \omega_2}) = \frac{1}{2} + \frac{1}{5} - \frac{1}{10}$ -- c\
-
-\$ a + b \neq c \$\
-We can generalize this to $\omega_i$ event, where the $i^{th}$ event represents if the number is divisible by i+1.\
+Let the sample space $\Omega$ be the set of all natural numbers $N$.  
+Let the events $S_1$ := number is divisble by 2, $S_2$ := number is divisible by 5.  
+Then,  
+$P({S_1}) = \frac{1}{2}$ \
+$P({S_2}) = \frac{1}{5}$ \
+$P({S_1 \cup S_2}) = \frac{1}{2} + \frac{1}{5} - \frac{1}{10} = \frac{3}{5}$ \
+$P(S_1) + P(S_2) = \frac{1}{2} + \frac{1}{5} = \frac{7}{10}$  
+$1 \neq 2$  
+We can generalize this to $S_i$ event, where the $i^{th}$ event represents if the number is divisible by i+1.\
 
 Hence proven.
 
-## 3.3 (Q4)
+### (Q4)
 
-The probabilities of disjoint sets is simple summation. Breaking the problem into disjoint sets :- $$
-P(A \cup B) = P(A\cap B^c) + P(A\cap B) + P(A^c \cap B) -- 1
-$$ Now $$
-P(A) = P(A \cap B^c) + P(A \cap B) -- 2 \\
-P(B) = P(B \cap A^c) + P(A \cap B) -- 3 \\
+Using Rule 3,
+$$
+P(A \cup B) = P(B) + P(B \setminus A) ..1 \\
+P(A \cup B) = P(A) + P(A \setminus B) ..2 \\
+P(A \cup B) = P(B \setminus A) + P(A \setminus B) + P(A \cap B) ..3 \\
 $$
 
-Rearranging 2, 3 and substituting $P(A\cap B^c), P(A^c \cap B)$ values in 1
+1 + 2 - 3 =>
 
 $$
-P(A \cup B) = P(A) - P(A \cap B) + P(B) - P(A \cap B) + P(A \cap B) \\
-=> P(A \cap B) = P(A) + P(B) - P(A \cap B)
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
 $$
-
 Hence Proven
