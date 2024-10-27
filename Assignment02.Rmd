@@ -2,7 +2,7 @@
 title: "Assignment 2"
 author: "Dushyant Goel"
 date: "2024-09-25"
-output: html_document # you can change to other output format if you want
+output: pdf_document # you can change to other output format if you want
 ---
 
 ```{r}
@@ -13,46 +13,58 @@ data("Hawks")
 
 # 1. Data Wrangling
 
-## 1.1 (Q1)
+## 1.1 Select and Filter
+### (Q1)
 
 ```{r}
-hSF <- Hawks %>%
-filter(Species == "RT", Weight >= 1000) %>%
-select(Wing, Weight, Tail) 
+hsf <- Hawks %>%
+  filter(Species == "RT", Weight >= 1000) %>%
+  select(Wing, Weight, Tail)
+
+head(hsf, 5)
 ```
 
-## 1.1 (Q2)
+### (Q2)
 
-The data has `3` variables. In Machine Learning parlance, there are `3` features. There are `398` observables, which in different context may be called "examples" or "observations"
+The data has `3` variables. In Machine Learning parlance, there are `3` features.   
+There are `398` observables, which in different context may be called "examples" or "observations"  
 
-## 1.2 (Q1)
+## 1.2 The arrange function 
+### (Q1)
 
 ```{r}
-hSF %>%
-arrange(Wing) %>%
-head(n=5)
+hsf %>%
+  arrange(Wing) %>%
+  head(n = 5)
 ```
 
-## 1.3 (Q1)
+## 1.3 Join and rename functions
+### (Q1)
 
 ```{r}
-hawkSpeciesNameCodes <-
-data.frame(species_code = c('CH', 'RT', 'SS'), species_name_full = c("Cooper's", "Red-tailed", "Sharp-shinned"))
+species_code <- c("CH", "RT", "SS")
+species_name_full <- c("Cooper's", "Red-tailed", "Sharp-shinned")
+hawk_species_name_codes <-
+  data.frame(species_code, species_name_full)
+
+hawk_species_name_codes
 ```
 
-## 1.3 (Q2)
+### (Q2)
 
 ```{r}
-hawksFullName <- Hawks %>%
-left_join(hawkSpeciesNameCodes, by=c("Species"="species_code")) %>%
-select(-Species) %>%
-rename(Species = species_name_full)
+hawks_full_name <- Hawks %>%
+  left_join(hawk_species_name_codes, by = c("Species" = "species_code")) %>%
+  select(-Species) %>%
+  rename(Species = species_name_full)
 ```
 
-## 1.3 (Q3)
+### (Q3)
 
 ```{r}
-hawksFullName %>% select(Species, Wing, Weight) %>% head(n=7)
+hawks_full_name %>%
+  select(Species, Wing, Weight) %>%
+  head(n = 7)
 ```
 
 Yes, it matters what type of join we use. There are 4 options:
@@ -67,138 +79,161 @@ Yes, it matters what type of join we use. There are 4 options:
 
 It would have made a difference if the column `Species` in the data.frame `Hawks` had NA values or values different from "CH", "RT" or "SS".
 
-### 1.4 (Q1)
+## 1.4 The mutate function 
+
+### (Q1)
 
 ```{r}
-hawksWithBMI <- Hawks %>%
-mutate(bird_BMI = (Weight*1000/((Wing)**2))) %>%
-arrange(desc(bird_BMI)) %>%
-select(Species, bird_BMI)
+hawks_with_bmi <- Hawks %>%
+  mutate(bird_BMI = (Weight * 1000 / ((Wing)**2))) %>%
+  select(Species, bird_BMI) %>%
+  arrange(desc(bird_BMI))
+
+hawks_with_bmi %>%
+  head(8)
 ```
 
-NB: To match the values of BMI in reference, the original weight must be assumed in `kgs` and wingspan in `mm`. It is comical then, to think of haws weighing a ton but flying with wings of less than 500 mm.
+NB: To match the values of BMI in reference, the original weight must be assumed in `kgs` and wingspan in `mm`. It is comical then, to think of hawks weighing a ton but flying with wings of less than 500 mm.
 
-## 1.5 (Q1)
+## 1.5 Summarize and group-by functions
+### (Q1)
 
 ```{r}
-hawksFullName %>%
-group_by(Species) %>%
-summarise(num_rows = n(), mn_wing = mean(Wing, na.rm=TRUE), md_wing = median(Wing, na.rm=TRUE), t_mn_wing = mean(Wing, trim=0.1, na.rm=TRUE), b_wt_ration = max(Wing/Tail, na.rm=TRUE))
+hawks_full_name %>%
+  group_by(Species) %>%
+  summarise(num_rows = n(),
+            mn_wing = mean(Wing, na.rm = TRUE),
+            md_wing = median(Wing, na.rm = TRUE),
+            t_mn_wing = mean(Wing, trim = 0.1, na.rm = TRUE),
+            b_wt_ration = max(Wing / Tail, na.rm = TRUE))
 
 ```
 
-## 1.5 (Q2)
+### (Q2)
 
 ```{r}
-hawksFullName %>%
-select(Wing, Weight, Culmen, Hallux, Tail, StandardTail, Tarsus, Species) %>%
-group_by(Species) %>%
-summarise(across(everything(), ~sum(is.na(.x))))
+hawks_full_name %>%
+  select(Wing, Weight, Culmen, Hallux, Tail, StandardTail, Tarsus, Species) %>%
+  group_by(Species) %>%
+  summarise(across(everything(), ~sum(is.na(.x))))
 ```
+
+---
+
 
 # 2. Random experiments, events and sample spaces, and the set theory
+## Random experiments, events and sample space
+### (Q1)
 
-## 2.1 (Q1)
+**Random Experiment** : A random experiment is an event which 
+- has a well defined set of outcomes. 
+- can be repeated infinitely many times.
 
-**Random Experiment** : A random experiment is an event which - has a well defined set of outcomes. - can be repeated infinitely many times.
+### (Q2)
 
-## 2.1 (Q2)
+When we roll a dice twice, this is a random experiment. The sample space\
+$\Omega$ = {(a,b) | a,b $\in$ {1, 2, 3, 4, 5, 6}}
 
-When we roll a dice, this is a random experiment. The sample space\
-$\Omega$ = {1, 2, 3, 4, 5, 6}
-
-An event, $\epsilon$ is any (or none) combination of events from $\Omega$
-
-For example, $\epsilon = \{1,2,3\}$.\
-
-Since we can pick none or any number of elements of $\Omega$, it follows that the total number of events is the cardinality of superset of $\Omega$. Since $\Omega$ contains $6$ elements, the number of events possible is\
-$2^6 = 64$\
+There are $36$ possible outcomes.\
+Since we can pick none or any number of elements of $\Omega$, it follows that the total number of events is the cardinality of superset of $\Omega$. Since $\Omega$ contains $36$ elements, the number of events possible is\
+$2^{36}$\
 
 By definition, the empty set $\phi$ is also considered an event.
 
-## 2.2 (Q1)
 
-\$\$
+## 2.2 Set Theory 
+### (Q1) Set Operations
 
-A := {1, 2, 3} \\ B := {2, 4, 6} \\ C := {4, 5, 6} \\
+$A := {1, 2, 3} \\ B := {2, 4, 6} \\ C := {4, 5, 6}$
 
-\$\$
+1.  $A \cup B := {1, 2, 3, 4, 6}$
+2.  $A \cap B := {2} \\ A \cap C := \phi$
+3.  $A \setminus B := \{1, 3\} \\ A \setminus C := \{1, 2, 3\}$
+4.  $A$ and $B$ are not disjoint, $A$ and $C$ are disjoint.
+5.  By definition of complementary, $B$ and $A \setminus B$ are disjoint sets.
+6.  $\{1, 2, 3, 4, 5, 6 \}$  
+    Partition into $two$ sets, say even and odd ${\{1, 3, 5\}, \{2, 4, 6\}}$  
+    Partition into $three$ sets, say ${\{1, 4\}, \{2, 5\}, \{3, 6\}}$  
 
-1.  \$ A \cup B := {1, 2, 3, 4, 6} \$
-2.  \$ A \cap B := {2} \$ , \$ A \cap C := \phi \$
-3.  \$ A \setminus B := {1, 3}\$, \$ A \setminus C := {1, 2, 3} \$
-4.  \$ A \$ and \$ B \$ are not disjoint, \$ A \$ and \$ C \$ are disjoint.
-5.  By definition of complementary, \$ B \$ and \$ A :setminus B \$ are disjoint sets.
-6.  \$ {1, 2, 3, 4, 5, 6 } \$\
-    Partition into $two$ sets, say even and odd. $\{\{1, 3, 5\}, \{2, 4, 6\}\}$\
-    Partition into $three$ sets, say $\{\{1, 4\}, \{2, 5\}, \{3, 6\}\}$\
+### (Q2) Complements, subsets and De Morgan's Law
 
-## 2.2 (Q2)
-
-1.  \$\$
-
-    (A^c)^c =\>\\ \omega \in \Omega : \omega \notin A\^c =\>\\ \omega \in A =\> \\ A
-
-    \$\$
-
+1.  $A$
 2.  $\phi$
+3.  Suppose $x \in B^c$  
+$\implies x \notin B$  
+$\implies x \notin A$  
+$\implies x \in A^c$  
+This holds $\forall x \in B$, hence $A^c \subseteq B^c$
+4.  To Prove:  
+    $(A \cap B)^c = A^c \cup B^c$  
+Part 1 : $x \in (A \cap B)^c \implies x \in A^c \cup B^c$  
+Let $x \in (A \cap B)^c$  
+Then, $x \notin A \cap B$  
+Then, either $x \notin A$ or $x \notin B$ or both  
+if $x \notin A$ then $x \in A^c$  
+if $x \notin B$ then $x \in B^c$  
+in either case, $x \in A^c \cup B^c$  
+Part 2: $x \in A^c \cup B^c \implies x \in (A \cap B)^c$  
+Let $x \in A^c \cup B^c$  
+Assume $x \notin (A \cap B)^c$  
+Then, $x \in A \cap B$  
+Then, $x \in A\ and\ x \in B$  
+Then, $x \notin A^c\ and\ x \notin B^c$  
+Then, $x \notin A^c \cup B^c$  
+This is a contradiction, hence $x \in A^c \cup B^c$  
+From part 1 and part 2: $(A \cap B)^c = A^c \cup B^c$  
+Hence proven.  
+$(\bigcap_{k=1}^{K}A_k)^c = \bigcup_{k=1}^{K}(A_k)^c$  
+5.  To Prove:  
+$(A \cup B)^c = A^c \cap B^c$  
+Part 1: $x \in (A \cup B)^c \implies x \in A^c \cap B^c$  
+Let $x \in (A \cup B)^c$  
+Then, $x \notin A \cup B$  
+Then, $x \notin A\ and\ x \notin B$  
+Then, $x \in A^c\ and\ x \in B^c$
+Then, $x \in A^c \cap B^c$  
+Part 2: $x \in A^c \cap B^c \implies x \in (A \cup B)^c$  
+Let, $x \in A^c \cap B^c$  
+Assume, $x \notin (A \cup B)^c$  
+Then, $x \in (A \cup B)^c$  
+Either, $x \in A$ or $x \in B$ or both  
+In both cases, $x \notin A^c \cap B^c$  
+This is a contradiction, hence $x \in A^c \cup B^c$  
+From part 1 and part 2: $(A \cup B)^c = A^c \cap B^c$  
+Hence proven.
 
-3.  Suppose \$ x \in B\^c $\$ =\> x \notin B \$ --- 1\
-    \$ A \subseteq B $\$ =\> \forall y \in B, y \in A \$\
+6. $(\bigcap_{k=1}^{K} A_k)^c = \bigcup_{k=1}^{K} A_k^c$  
 
-Combining 1 and 2 \$ if y \notin B =\> y \notin A \$ --- 2\
-\$ y \in B\^c =\> y \in A\^c $\$ B\^c \subseteq A\^c \$
+### (Q3)
 
-4.  To Prove:\
-    \$ (A \cap B)\^c = A\^c \cup B\^c \$\
+$\|E\| := 2^K - 1$  
+It is not $2^K$ because the set $\Omega$ is not included in $E$ as defined. 
 
-Suppose,\
-\$ x \in (A \cap B)\^c $\$ x \notin (A \cap B) $\$ x  is  not  in  A  and  x  is  not  in  B $\$ x \notin A  and  x \notin B \$\
-\$ x \in A\^c and x \in B\^c \$\
-\$ x \in A\^c \cap B\^c \$\
-
-Expression for \$(\bigcup*{k=1}\^{K} A_k)\^c \$\
-\$*\bigcap{k=1}\^{K} A_k \^c \$\
-
-5.  To Prove : \$ (A \cup B)\^c = A\^c \cap B\^c \$
-
-Suppose,\
-\$ x \in (A \cup B)\^c \$\
-\$ x \notin (A \cup B) \$\
-\$ x \notin A and x \notin B \$\
-\$ x \notin A\^c and x \notin B\^c \$\$ x \in A\^c \cap B\^c \$
-
-6.  Expression for \$(\bigcap*{k=1}\^{K} A_k)\^c \$\
-    \$*\bigcup{k=1}\^{K} A_k \^c \$
-
-## 2.2 (Q3)
-
-\$ \|E\| := 2\^K - 1 \$ This is because every element in $\omega$ has $2$ options, - to be chosen as an element of a set, which is contained in E. - not be chosen.
-
-But Since \$ E \subset \omega\$ and not \$ E \subseteq \omega\$, we substract the case when all elements of $\omega$ are chosen.
-
-## 2.2 (Q4)
+### (Q4)
 
 1.  $\phi$
-2.  
+2.  To Prove:
+- $S_1 \cup S_2 \cup S_3 \cup S_4 = A_1 \cup A_2 \cup A_3 \cup A_4$  
+Part 1: Let $x \in S_1 \cup S_2 \cup S_3 \cup S_4$  
+$\forall i\ if\ x \in S_i$   
+$\implies x \in A_i \setminus _{j < i}A_j$  
+$\implies x \in A_i$  
+Part 2: Let $x \in A_1 \cup A_2 \cup A_3 \cup A_4$  
+$\forall i\ if\ x \in A_i$  
+$\implies x \in A_i \setminus _{j < i} A_i$ for sufficiently small $i$  
+$\implies x \in S_i$  
+From part 1 and part 2 $S_1 \cup S_2 \cup S_3 \cup S_4 = A_1 \cup A_2 \cup A_3 \cup A_4$  
+- $S_1, S_2, S_3, S_4$ are pairwise disjoint.  
+Suppose $x \in S_{i_0} \cap S_{i_1}$ for some $i_0 < i_1$  
+Then, $x \in S_{i_1}$  
+$\implies x \in A_{i_1} \setminus _{i < i_1} A_i$  
+$\implies x \notin A_{i_0}$ (as $i_0 < i_1$)  
+$\implies x \notin A_{i_0} \setminus _{i < i_0} A_i$  
+$\implies x \notin S_{i_0}$  
+This is a contradiction, hence there is no $x$ such that $x \in S_{i_0} \cap S_{i_1}$  
+i.e. $S_{i_0} and S_{i_1}$ are pairwise disjoint
 
--   \$ S_1, S_2, S_3, S_4 \$ are pairwise disjoint.
--   \$ S_1 \cup S_2 \cup S_3 \cup S_4 = A_1 \cup A_2 \cup A_3 \cup A_4 \$
-
-Hence the given \$ \bigcup S{i} \$ form a partition.
-
-# 2.2 (Q5)
-
-1.  $\1_{A^c(}(\omega) := 1 - 1_A(\omega)$
-2.  $\Omega$
-3.  \$ 1\_{(A \cap B)\^c} =\> \$\
-    \$ 1 - 1\_{A \cap B} =\> \$\
-    \$ 1 - 1_A.1_B =\> \$\
-    \$ 1 - 1_A + 1 - 1_B - 1 + 1_A + 1_B - 1_A.1_B \$ (adding and subtracting $1_A, 1_B$\
-    \$ (1-1_A) + (1-1_B) - (1-1_A)(1-1_B) \$\
-    \$ (1\_{A\^c}) + 1\_{B\^c} - 1\_{A^c}.1\_{B^c} \$ \$ 1\_{A\^c \cup B\^c} \$
-
-\$ Q.E.D. \$
+Hence the given $\bigcup S_{i}$ form a partition.
 
 # 3. Probability theory
 
